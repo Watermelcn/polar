@@ -12,6 +12,7 @@ import {
 } from '@polar-sh/ui/components/atoms/DataTable'
 import FormattedDateTime from '@polar-sh/ui/components/atoms/FormattedDateTime'
 import Pill from '@polar-sh/ui/components/atoms/Pill'
+import { toast } from '@/components/Toast/use-toast'
 import { useCallback } from 'react'
 
 const formatPrice = formatCurrency('standard', 'en-US')
@@ -48,10 +49,17 @@ const DownloadInvoiceButton = ({
   const getInvoice = useGetOrganizationOrderInvoice(organizationId)
 
   const onClick = useCallback(async () => {
-    const result = await getInvoice.mutateAsync(order.id)
-    const opened = window.open(result.url, '_blank', 'noopener,noreferrer')
-    if (!opened) {
-      window.location.href = result.url
+    try {
+      const result = await getInvoice.mutateAsync(order.id)
+      const opened = window.open(result.url, '_blank', 'noopener,noreferrer')
+      if (!opened) {
+        window.location.href = result.url
+      }
+    } catch {
+      toast({
+        title: 'Failed to download invoice',
+        description: 'Could not retrieve the invoice. Please try again later.',
+      })
     }
   }, [getInvoice, order.id])
 
