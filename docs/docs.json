@@ -642,6 +642,10 @@
       {
         "label": "Contact support",
         "href": "https://polar.sh/docs/support"
+      },
+      {
+        "label": "Security Policy",
+        "href": "https://github.com/polarsource/polar/blob/main/SECURITY.md"
       }
     ],
     "primary": {
