@@ -16,7 +16,7 @@ from polar_sdk.models import (
 )
 from pytest_mock import MockerFixture
 
-from polar.integrations.polar.service import (
+from polar.integrations.polar.exceptions import (
     PolarSelfNoActiveSubscription,
     PolarSelfNotConfigured,
     PolarSelfOrderNotFound,
@@ -24,8 +24,8 @@ from polar.integrations.polar.service import (
     PolarSelfWebhookError,
     SupportBenefitError,
     TransactionFeeBenefitError,
-    polar_self,
 )
+from polar.integrations.polar.service import polar_self
 from polar.postgres import AsyncSession
 
 SELF_ORG_ID = uuid.UUID("00000000-0000-0000-0000-000000000001")
